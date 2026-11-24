@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Produções de Ana Carolina Vaz</title>
+<meta name="description" content="Repositório das produções públicas de Ana Carolina Vaz: índices, painéis, notas técnicas, relatórios, trabalhos acadêmicos e artigos de opinião.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700&family=Red+Hat+Text:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE  trabalho acadêmico pessoal: sóbrio, preciso, fácil de conferir e citar
+   IDEA   o sumário e a bibliografia anotada de um livro: datas penduradas na margem, créditos como ficha técnica
+   PICTURE a própria lista de produções; no topo, o sumário clicável com a contagem de cada seção
+   COLOUR fundo branco, faixa azul Oxford #0b1f4b, magenta para links e seleção; noite #070f26
+   TYPE   Red Hat Display 700 + Red Hat Text
+   LAYOUT faixa com nome e bio à esquerda, sumário e busca à direita; entradas em três colunas (data, texto, documentos); no celular, uma coluna */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#070f26);--ink:light-dark(#0e1733,#e9edf7);--mut:light-dark(#4b5677,#a6afca);--rule:light-dark(#dde2ee,#1c2a52);--band:light-dark(#0b1f4b,#0d2257);--acc:light-dark(#c4104d,#ff6b9f);--hot:#e0115f;--tint:light-dark(#f3f5fb,#0c1835)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Red Hat Text",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip}
+a{color:var(--acc)}
+.band{padding-block:clamp(28px,4vw,56px);padding-left:max(5vw,16px,env(safe-area-inset-left,0px));padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto}
+header.band{background:var(--band);color:#fff}
+.top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+h1{font:700 clamp(42px,6.5vw,60px)/1.02 "Red Hat Display",system-ui,sans-serif;letter-spacing:-.02em;margin:0 0 16px}
+.bio{color:#dce3f5;font-size:17px;max-width:36em;margin:0 0 12px}
+.alias{color:#c9d3ee;font-size:15px;margin:0 0 16px}
+.ids{display:flex;flex-wrap:wrap;gap:10px 22px;margin:0;font-size:15px}
+.ids a{color:#fff;text-underline-offset:3px}
+.sumario h2{font:600 16px/1.3 "Red Hat Display",system-ui,sans-serif;color:#c9d3ee;margin:4px 0 10px}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0 0 16px;padding:0;list-style:none}
+.chips li:first-child{grid-column:1/-1}
+.chip{width:100%;height:100%;display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-height:48px;padding:8px 14px;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:transparent;color:#fff;font:500 17px/1.2 "Red Hat Text",system-ui,sans-serif;text-align:left;cursor:pointer}
+.chip b{font:700 26px/1 "Red Hat Display",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:#fff}
+.chip[aria-pressed=true]{background:var(--hot);border-color:var(--hot)}
+.busca label{display:block;font-size:14px;color:#c9d3ee;margin-bottom:6px}
+.busca input{width:100%;min-height:48px;padding:10px 14px;border:1px solid rgba(255,255,255,.35);border-radius:10px;background:#fff;color:#0e1733;font:16px "Red Hat Text",system-ui,sans-serif}
+.busca input::placeholder{color:#6a7493}
+:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+main.band{padding-top:clamp(20px,3vw,36px)}
+.conta{color:var(--mut);font-size:15px;margin:0 0 18px}
+.sec{margin:0 0 clamp(32px,5vw,56px)}
+.sec>h2{font:700 clamp(24px,3vw,30px)/1.1 "Red Hat Display",system-ui,sans-serif;letter-spacing:-.01em;margin:0 0 8px}
+.sec>.intro{color:var(--mut);max-width:62em;margin:0 0 14px}
+.it{display:grid;grid-template-columns:6.5em minmax(0,1.45fr) minmax(0,1fr);gap:12px 28px;padding:22px 0;border-top:1px solid var(--rule)}
+.when{font:600 15px/1.25 "Red Hat Display",system-ui,sans-serif;color:var(--mut);white-space:nowrap}
+.when b{display:block;font-size:24px;color:var(--ink)}
+.kind{font-weight:700;font-size:14px;color:var(--acc);margin:0 0 4px}
+.it h3{font:700 20px/1.25 "Red Hat Display",system-ui,sans-serif;margin:0 0 6px;text-wrap:balance}
+.src{color:var(--mut);font-size:15px;margin:0 0 10px}
+.desc{margin:0 0 10px;max-width:64ch}
+.cred{font-size:15px;margin:0 0 4px;max-width:72ch}
+.cred span{font-weight:700}
+.docs{display:flex;flex-direction:column;gap:8px;align-self:start}
+.doc{display:flex;align-items:center;gap:10px;min-height:46px;padding:8px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--tint);color:var(--ink);text-decoration:none;font-size:15px;line-height:1.3}
+.doc:hover{border-color:var(--acc)}
+.fmt{flex:none;font:700 13px/1 "Red Hat Display",system-ui,sans-serif;padding:5px 7px;border-radius:6px;background:var(--band);color:#fff}
+.vazio{padding:24px 0;border-top:1px solid var(--rule)}
+.vazio button{margin-left:10px;min-height:44px;padding:8px 14px;border-radius:10px;border:1px solid var(--rule);background:var(--tint);color:var(--ink);font:500 15px "Red Hat Text",system-ui,sans-serif;cursor:pointer}
+footer.band{border-top:1px solid var(--rule);color:var(--mut);font-size:15px;padding-block:24px 40px}
+[hidden]{display:none!important}
+.nw{white-space:nowrap}
+@media(max-width:980px){.it{grid-template-columns:6.5em minmax(0,1fr)}.docs{grid-column:2}}
+@media(max-width:760px){.top{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.it{grid-template-columns:minmax(0,1fr);gap:4px}.docs{grid-column:auto;margin-top:8px}.when{display:flex;gap:6px;align-items:baseline}.when b{display:inline;font-size:15px;color:var(--mut)}.bio{font-size:15px;margin-bottom:10px}.alias{font-size:14px;margin-bottom:12px}.ids{gap:8px 16px;font-size:14px}h1{margin-bottom:12px}.chip{font-size:15px;min-height:46px;padding:8px 12px}.chip b{font-size:22px}.it h3{font-size:19px}}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<header class="band">
+  <div class="wrap top">
+    <div>
+      <h1>Ana Carolina Vaz</h1>
+      <p class="bio">Doutoranda, mestra e bacharel em Ciência Política pela Universidade de Brasília (IPOL/UnB), no grupo de pesquisa Resocie. Pesquisadora do INCT Participa, na equipe do Observatório Participa (OPar), e do NEES/UFAL. Trabalha com participação social, instituições políticas, movimentos sociais, eleições, política indígena e métodos de pesquisa.</p>
+      <p class="alias">Também assina como Ana Vaz, Ana Carolina Vaz da Silva e <span class="nw">Ana Carolina Vaz-Silva</span>.</p>
+      <p class="ids">
+        <a href="https://orcid.org/0000-0001-5483-1457" target="_blank" rel="noopener">ORCID</a>
+        <a href="http://lattes.cnpq.br/8313613483178066" target="_blank" rel="noopener">Currículo Lattes</a>
+        <a href="https://unb.academia.edu/AnaCarolinaVaz" target="_blank" rel="noopener">Academia.edu</a>
+        <a href="https://www.linkedin.com/in/anacarolinavazz" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </div>
+    <nav class="sumario" aria-label="Sumário">
+      <h2>Produções públicas</h2>
+      <ul class="chips">
+        <li><button type="button" class="chip" data-cat="" aria-pressed="true">Tudo <b>24</b></button></li>
+        <li><button type="button" class="chip" data-cat="indices" aria-pressed="false">Índices e painéis <b>2</b></button></li>
+        <li><button type="button" class="chip" data-cat="notas" aria-pressed="false">Notas e relatórios <b>11</b></button></li>
+        <li><button type="button" class="chip" data-cat="academicos" aria-pressed="false">Trabalhos acadêmicos <b>6</b></button></li>
+        <li><button type="button" class="chip" data-cat="opiniao" aria-pressed="false">Opinião e divulgação <b>5</b></button></li>
+      </ul>
+      <div class="busca">
+        <label for="busca">Buscar por título, coautoria ou tema</label>
+        <input id="busca" type="search" placeholder="Ex.: coligações, indígenas, IPar" autocomplete="off">
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="band" id="lista">
+  <div class="wrap">
+    <p class="conta" id="conta" aria-live="polite">24 produções</p>
+
+    <!-- Para incluir uma produção: copie um bloco <article class="it">, ajuste data-cat (indices, notas, academicos ou opiniao), a data, os textos e os links. As contagens do sumário se atualizam sozinhas. -->
+
+    <section class="sec" data-sec="indices">
+      <h2>Índices e painéis</h2>
+      <p class="intro">Medidas e painéis em que Ana Carolina Vaz trabalhou, com os documentos de metodologia de cada um.</p>
+
+      <article class="it" data-cat="indices">
+        <div class="when">set. <b>2026</b></div>
+        <div>
+          <p class="kind">Painel interativo</p>
+          <h3>Sentidos da Participação – Eleições 2026</h3>
+          <p class="src">Observatório Participa (OPar), INCT Participa. Projeto A participação social nos programas de governo – eleições 2026.</p>
+          <p class="desc">Reúne a codificação dos programas de governo registrados no TSE pelas candidaturas à Presidência e aos governos estaduais: sentidos da participação, qualificadores, públicos e temas, instrumentos.</p>
+          <p class="cred"><span>Desenvolvimento e manutenção do painel:</span> <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://v2opar2026.netlify.app/" target="_blank" rel="noopener"><span class="fmt">Painel</span>Abrir o painel</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/observatorio-participa-opar/participacao-nas-eleicoes-2026/opar-sentidos-da-participacao-eleicoes-2026" target="_blank" rel="noopener"><span class="fmt">Site</span>Página no site do INCT Participa</a>
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/pdfs/Nota_metodologica_OPar_programas_de_governo_2026.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota metodológica: Análise dos programas de governo e da participação social nas eleições de 2026</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="indices">
+        <div class="when">ago. <b>2022</b></div>
+        <div>
+          <p class="kind">Índice</p>
+          <h3>Índice Legisla Brasil</h3>
+          <p class="src">Legisla Brasil, em parceria com a economista Olívia Carneiro, que idealizou o índice. Primeira edição, lançada em agosto de 2022, sobre a legislatura 2019-2022 da Câmara dos Deputados.</p>
+          <p class="desc">Avalia e compara o trabalho de cada deputada e deputado federal em quatro eixos (produção legislativa, fiscalização, mobilização e alinhamento partidário), com 17 indicadores calculados a partir dos dados abertos da Câmara e do Portal da Transparência. A metodologia foi discutida com 25 especialistas antes do lançamento.</p>
+          <p class="cred"><span>Desenvolvimento metodológico e análise dos dados:</span> <strong>Ana Carolina Vaz</strong> e Andréia Pereira (Legisla Brasil).</p>
+          <p class="cred"><span>Coordenação técnica e metodológica:</span> <strong>Ana Carolina Vaz</strong> (consultoria, mar. a ago. 2022), com desenho avaliativo, coleta e organização dos dados, validação dos indicadores e cálculo em R.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://indice.legislabrasil.org/" target="_blank" rel="noopener"><span class="fmt">Site</span>Site do índice</a>
+          <a class="doc" href="https://drive.google.com/file/d/1cfmiAUECgnLnyYE8Aszuq9JNA3Ar2w4R/view" target="_blank" rel="noopener"><span class="fmt">PDF</span>Relatório técnico com a metodologia</a>
+          <a class="doc" href="https://www.correiobraziliense.com.br/politica/2022/08/5025886-legisla-brasil-lanca-nova-proposta-para-avaliacao-de-parlamentares.html" target="_blank" rel="noopener"><span class="fmt">Imprensa</span>Lançamento no Correio Braziliense</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="sec" data-sec="notas">
+      <h2>Notas técnicas e relatórios</h2>
+      <p class="intro">Relatórios do IPar-Eleitoral e notas técnicas do Observatório Participa (OPar) sobre as eleições de 2026, além de relatórios de pesquisa e de governo com Ana Carolina Vaz na equipe.</p>
+
+      <article class="it" data-cat="notas">
+        <div class="when">out. <b>2026</b></div>
+        <div>
+          <p class="kind">Relatório IPar-Eleitoral, 1º turno</p>
+          <h3>Lula vence mais nos municípios onde o envolvimento partidário-eleitoral da população é maior</h3>
+          <p class="src">Relatório 02 do Observatório Participa (OPar), INCT Participa.</p>
+          <p class="desc">Lê o primeiro turno de 2026 pelo IPar-Eleitoral, índice do OPar que combina comparecimento, alistamento voluntário de jovens de 16 e 17 anos e filiação partidária. Lula liderou em cerca de 60% dos municípios com maior participação partidário-eleitoral; Flávio Bolsonaro venceu em cerca de dois terços dos de menor participação.</p>
+          <p class="cred"><span>Redação:</span> Adrian Gurza Lavalle, Carla Cecília Rodrigues Almeida, Lizandra Serafim e <strong>Ana Carolina Vaz</strong>. <span>Desenho e análise de dados:</span> Rodrigo Martins.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Relat%C3%B3rio_1%C2%BAturno_IPar.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Relatório completo</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/ipar/relatorio-1o-turno" target="_blank" rel="noopener"><span class="fmt">Site</span>Página do relatório</a>
+          <a class="doc" href="https://inctparticipa.org/site/media/attachments/2026/09/08/nota-tecnica_ipar.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota técnica do índice IPar-Eleitoral</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when">out. <b>2026</b></div>
+        <div>
+          <p class="kind">Relatório IPar-Eleitoral, 2º turno</p>
+          <h3>IPar no segundo turno de 2026</h3>
+          <p class="src">Relatório 03 do Observatório Participa (OPar), INCT Participa.</p>
+          <p class="desc">Lula venceu em cerca de 63% dos municípios de alto envolvimento partidário-eleitoral e em 40% dos de baixo envolvimento, mas cresceu mais sobre Flávio Bolsonaro nas cidades de baixo envolvimento.</p>
+          <p class="cred"><span>Redação:</span> Adrian Gurza Lavalle, Carla Cecília Rodrigues Almeida, Lizandra Serafim e <strong>Ana Carolina Vaz</strong>. <span>Desenho e análise de dados:</span> Rodrigo Martins.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Relat%C3%B3rio_2%C2%BAturno_IPar.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Relatório completo</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/ipar/relatorio-2o-turno" target="_blank" rel="noopener"><span class="fmt">Site</span>Página do relatório</a>
+          <a class="doc" href="https://diplomatique.org.br/?p=332889" target="_blank" rel="noopener"><span class="fmt">Imprensa</span>Repercussão no Le Monde Diplomatique Brasil</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/ipar/ipar-eleitoral" target="_blank" rel="noopener"><span class="fmt">Site</span>Sobre o IPar-Eleitoral</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when">14 set. <b>2026</b></div>
+        <div>
+          <p class="kind">Nota técnica, OPar</p>
+          <h3>A participação social nas eleições para Presidência da República – 2026</h3>
+          <p class="cred"><span>Autoria:</span> Lizandra Serafim, Carla Cecília Rodrigues Almeida, Jackson Macêdo, Adrian Gurza Lavalle, Rodrigo Martins, Inácio de Paula e Silva, <strong>Ana Carolina Vaz</strong> e Mariana de Souza Fonseca.</p>
+          <p class="cred"><span>Contribuição de Ana Carolina Vaz:</span> análise documental, sistematização, análise comparativa e visualização de dados.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Nota_t%C3%A9cnica_programas_de_governo_Presid%C3%AAncia_final.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota técnica</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/observatorio-participa-opar/participacao-nas-eleicoes-2026/nota-tecnica-nacional" target="_blank" rel="noopener"><span class="fmt">Site</span>Página da nota</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when">17 set. <b>2026</b></div>
+        <div>
+          <p class="kind">Nota técnica, OPar</p>
+          <h3>A participação social nas eleições para Governadores da Região Centro-Oeste – 2026</h3>
+          <p class="cred"><span>Autoria:</span> Lizandra Serafim, Brenda Gonçalves Andujas, Laura Moyano Malara, Alana da Silva Pereira, Inácio de Paula e Silva e <strong>Ana Carolina Vaz</strong>.</p>
+          <p class="cred"><span>Contribuição de Ana Carolina Vaz:</span> sistematização e análise comparativa, visualização de dados.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Nota_t%C3%A9cnica_programas_de_governo_CO.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota técnica</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/observatorio-participa-opar/participacao-nas-eleicoes-2026/nota-tecnica-centro-oeste" target="_blank" rel="noopener"><span class="fmt">Site</span>Página da nota</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when">17 set. <b>2026</b></div>
+        <div>
+          <p class="kind">Nota técnica, OPar</p>
+          <h3>A participação social nas eleições para os governos estaduais na região Norte – 2026</h3>
+          <p class="cred"><span>Autoria:</span> Lizandra Serafim, <strong>Ana Carolina Vaz</strong>, Larissa Nascimento, Maira Rodrigues e Inácio de Paula e Silva.</p>
+          <p class="cred"><span>Contribuição de Ana Carolina Vaz:</span> análise documental, sistematização e análise comparativa, visualização de dados e redação.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Nota_t%C3%A9cnica_programas_de_governo_Norte.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota técnica</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/observatorio-participa-opar/participacao-nas-eleicoes-2026/nota-tecnica-norte" target="_blank" rel="noopener"><span class="fmt">Site</span>Página da nota</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when">19 set. <b>2026</b></div>
+        <div>
+          <p class="kind">Nota técnica, OPar</p>
+          <h3>A participação social nas eleições para os governos estaduais na região Sul – 2026</h3>
+          <p class="cred"><span>Autoria:</span> Lizandra Serafim, Carla Almeida, Rafael Teixeira de Abreu, Alana da Silva Pereira, Letícia Caroline Marcomini, Erick Mateus Pacheco Lopes, Inácio de Paula e Silva e <strong>Ana Carolina Vaz</strong>.</p>
+          <p class="cred"><span>Contribuição de Ana Carolina Vaz:</span> análise documental, sistematização e análise comparativa, visualização de dados.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Nota_t%C3%A9cnica_programas_de_governo_Sul.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota técnica</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/observatorio-participa-opar/participacao-nas-eleicoes-2026/nota-tecnica-sul" target="_blank" rel="noopener"><span class="fmt">Site</span>Página da nota</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when">20 set. <b>2026</b></div>
+        <div>
+          <p class="kind">Nota técnica, OPar</p>
+          <h3>A participação social nas eleições para os governos estaduais na região Nordeste – 2026</h3>
+          <p class="cred"><span>Autoria:</span> Lizandra Serafim, Mariana de Souza Fonseca, Jackson Macêdo, Ingrid Raíssa Guerra Lins, <strong>Ana Carolina Vaz</strong> e Adriana Soares Alcântara.</p>
+          <p class="cred"><span>Contribuição de Ana Carolina Vaz:</span> sistematização e análise comparativa, visualização de dados e revisão.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Nota_t%C3%A9cnica_programas_de_governo_Nordeste.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota técnica</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/observatorio-participa-opar/participacao-nas-eleicoes-2026/nota-tecnica-nordeste" target="_blank" rel="noopener"><span class="fmt">Site</span>Página da nota</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when">23 set. <b>2026</b></div>
+        <div>
+          <p class="kind">Nota técnica, OPar</p>
+          <h3>A participação social nas eleições para os governos estaduais na região Sudeste – 2026</h3>
+          <p class="cred"><span>Autoria:</span> Lizandra Serafim, Larissa Nascimento, Nara Lima Mascarenhas Barbosa, Maira Rodrigues, Inácio de Paula e Silva e <strong>Ana Carolina Vaz</strong>.</p>
+          <p class="cred"><span>Contribuição de Ana Carolina Vaz:</span> análise documental, sistematização e análise comparativa, visualização de dados e revisão.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://inctparticipa.org/site/images/2026/Nota_t%C3%A9cnica_programas_de_governo_Sudeste.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Nota técnica</a>
+          <a class="doc" href="https://inctparticipa.org/site/index.php/pt/observatorio-participa-opar/participacao-nas-eleicoes-2026/nota-tecnica-sudeste" target="_blank" rel="noopener"><span class="fmt">Site</span>Página da nota</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when"><b>2026</b></div>
+        <div>
+          <p class="kind">Relatório de pesquisa</p>
+          <h3>Estudo exploratório sobre os direitos humanos de pessoas intersexo no Brasil</h3>
+          <p class="src">Rede Brasileira de Pessoas Intersexo (Intersexo Brasil), Brasília, 2026. Financiamento da Outright International e apoio do Ministério dos Direitos Humanos e da Cidadania.</p>
+          <p class="desc">Primeira pesquisa nacional de base comunitária sobre as condições de vida e as vulnerabilidades de pessoas intersexo no Brasil, com questionário aplicado entre abril e junho de 2026.</p>
+          <p class="cred"><span>Edição:</span> Vidda Guzzo e Caia Maria Coelho. <span>Revisão:</span> Amiel Vieira e Alex Ballestrin. <span>Análise:</span> <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://drive.google.com/file/d/1RpdmbtA7IiuTyfv5BRlVr9wlBiFN_cTu/view" target="_blank" rel="noopener"><span class="fmt">PDF</span>Relatório completo</a>
+          <a class="doc" href="https://drive.google.com/file/d/1-PwPI_yg3c3gVHtx3yPDYhd9pamRtDVr/view" target="_blank" rel="noopener"><span class="fmt">PDF</span>Sumário executivo</a>
+          <a class="doc" href="https://pesquisa2026.intersexobrasil.org/pesquisa-2026/" target="_blank" rel="noopener"><span class="fmt">Site</span>Página da pesquisa</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when"><b>2025</b></div>
+        <div>
+          <p class="kind">Relatório</p>
+          <h3>Retrato da Educação Infantil no Brasil 2025: relatório de análises</h3>
+          <p class="src">Ministério da Educação. Levantamento nacional sobre a gestão da educação infantil nos municípios brasileiros.</p>
+          <p class="cred"><span>Equipe técnica do relatório,</span> com <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://www.gov.br/mec/pt-br/pnei/retratoedInfantil2025.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Relatório completo</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="notas">
+        <div class="when"><b>2024</b></div>
+        <div>
+          <p class="kind">Guia técnico</p>
+          <h3>Guia de Ações e Serviços para a População em Situação de Rua</h3>
+          <p class="src">Instituto de Pesquisa e Estatística do Distrito Federal (IPEDF), Diretoria de Estudos e Políticas Sociais.</p>
+          <p class="desc">Identifica e caracteriza os serviços públicos oferecidos pelo Estado à população em situação de rua no Distrito Federal.</p>
+          <p class="cred"><span>Elaboração,</span> com <strong>Ana Carolina Vaz</strong> na equipe até abril de 2024.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://www.dip.ipe.df.gov.br/dipos/GuiaPopRuaDF.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Guia completo</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="sec" data-sec="academicos">
+      <h2>Trabalhos acadêmicos</h2>
+      <p class="intro">Artigos, capítulos, comunicações em congresso e dissertação.</p>
+
+      <article class="it" data-cat="academicos">
+        <div class="when">2 set. <b>2026</b></div>
+        <div>
+          <p class="kind">Artigo (preprint)</p>
+          <h3>Difusão e institucionalização dos conselhos municipais de políticas para mulheres no Brasil (1985-2022)</h3>
+          <p class="src">SciELO Preprints, 2026. Trabalho do 50º Encontro Anual da ANPOCS.</p>
+          <p class="desc">Separa difusão de institucionalização para ler a expansão dos conselhos municipais de políticas para mulheres em três períodos (1985-2002, 2003-2015 e 2016-2022). No último, a criação de conselhos continuou enquanto as estruturas federais da política para mulheres eram desmontadas.</p>
+          <p class="cred"><span>Autoria:</span> Milena Cristina Belançon, <strong>Ana Carolina Vaz</strong>, Carla Almeida e Carla Giani Martelli.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://preprints.scielo.org/index.php/scielo/preprint/view/17595" target="_blank" rel="noopener"><span class="fmt">Site</span>Ler no SciELO Preprints</a>
+          <a class="doc" href="https://doi.org/10.1590/SciELOPreprints.17595" target="_blank" rel="noopener"><span class="fmt">DOI</span>10.1590/SciELOPreprints.17595</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="academicos">
+        <div class="when">5 ago. <b>2026</b></div>
+        <div>
+          <p class="kind">Comunicação em congresso</p>
+          <h3>O território como combustível da ação coletiva indígena no Brasil: sentidos e usos políticos (2004-2026)</h3>
+          <p class="src">15º Encontro da Associação Brasileira de Ciência Política (ABCP), área temática Participação Política. UFPA, Belém, 2026.</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong> e Carla Guareschi.</p>
+        </div>
+      </article>
+
+      <article class="it" data-cat="academicos">
+        <div class="when">out. <b>2025</b></div>
+        <div>
+          <p class="kind">Comunicação em congresso</p>
+          <h3>O amargor da conquista: disputas e apropriações em torno da Tarifa Zero no transporte coletivo</h3>
+          <p class="src">49º Encontro Anual da ANPOCS, GT42 Cidades e democracia em disputa. Unicamp, Campinas, 2025.</p>
+          <p class="desc">Contesta a leitura de que a Tarifa Zero, bandeira histórica das lutas populares, foi apropriada pela direita e pelo empresariado do transporte coletivo. Desde junho de 2013, os limites impostos ao aumento das tarifas abriram uma crise de financiamento que levou até prefeitos de direita a adotar a gratuidade. Para os autores, a Tarifa Zero é uma conquista dos movimentos sociais.</p>
+          <p class="cred"><span>Autoria:</span> Paulo Henrique da Silva Santarém, <strong>Ana Carolina Vaz</strong> e Gustavo Henrique Serafim França.</p>
+        </div>
+      </article>
+
+      <article class="it" data-cat="academicos">
+        <div class="when"><b>2023</b></div>
+        <div>
+          <p class="kind">Capítulo de livro</p>
+          <h3>Autonomista na prática? Reflexões sobre as práticas de movimentos sociais e sua interação com partidos políticos</h3>
+          <p class="src">Em: Rebecca Neaera Abers, Debora Rezende de Almeida e Marisa von Bülow (orgs.). A disputa pela democracia no Brasil: ativismos em contextos turbulentos. Zouk, 2023 (ISBN 9786557781203). Livro coletivo do grupo de pesquisa Resocie, da UnB. Versão anterior apresentada no 46º Encontro Anual da ANPOCS (2022).</p>
+          <p class="desc">Usa a relação entre o Movimento dos Trabalhadores Sem-Teto (MTST) e o PSOL para tratar a autonomia dos movimentos sociais como uma prática que o movimento aciona conforme a situação, inclusive na interação com partidos.</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://www.bras-center.com/?p=20872" target="_blank" rel="noopener"><span class="fmt">Site</span>Sobre o livro</a>
+          <a class="doc" href="https://www.encontro2022.anpocs.org.br/atividade/view?q=YToyOntzOjY6InBhcmFtcyI7czozNToiYToxOntzOjEyOiJJRF9BVElWSURBREUiO3M6MjoiODIiO30iO3M6MToiaCI7czozMjoiZjhjYTNiYTVmMmJkNjA4MzdhMmFiMzE1ODRlMjBlNTkiO30%3D&amp;ID_ATIVIDADE=82" target="_blank" rel="noopener"><span class="fmt">Site</span>Sessão na ANPOCS 2022</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="academicos">
+        <div class="when"><b>2022</b></div>
+        <div>
+          <p class="kind">Capítulo de livro</p>
+          <h3>Partidos políticos e inclusão: candidaturas coletivas, negros, mulheres e indígenas</h3>
+          <p class="src">Em: Tribunal Superior Eleitoral. Sistematização das normas eleitorais: eixo temático VIII, partidos políticos. Brasília: TSE, 2022 (Coleção SNE, Fase II, v. 9).</p>
+          <p class="desc">Discute os desafios das candidaturas coletivas, o financiamento público de candidaturas de mulheres e de pessoas negras e a relação entre partidos e candidaturas indígenas.</p>
+          <p class="cred"><span>Autoria:</span> Carlos Machado, Bárbara Lopes Campos, <strong>Ana Carolina Vaz</strong> e Cristiano Rodrigues.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://bibliotecadigital.tse.jus.br/items/0696883e-3dfe-4a39-995a-adbd353865c9" target="_blank" rel="noopener"><span class="fmt">Site</span>Capítulo na Biblioteca Digital do TSE</a>
+          <a class="doc" href="https://www.tse.jus.br/institucional/catalogo-de-publicacoes/arquivos/sne2-vol9-1/@@display-file/file/sne2-vol9.pdf" target="_blank" rel="noopener"><span class="fmt">PDF</span>Livro completo no site do TSE</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="academicos">
+        <div class="when"><b>2021</b></div>
+        <div>
+          <p class="kind">Dissertação de mestrado</p>
+          <h3>Reforma política, racionalidade partidária e coligações eleitorais: um debate sobre os perfis de estratégias para as eleições de deputados estaduais em 2018</h3>
+          <p class="src">Programa de Pós-Graduação em Ciência Política, Universidade de Brasília (IPOL/UnB).</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://unb.academia.edu/AnaCarolinaVaz" target="_blank" rel="noopener"><span class="fmt">Site</span>Ver no Academia.edu</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="sec" data-sec="opiniao">
+      <h2>Opinião e divulgação</h2>
+      <p class="intro">Textos para leitores de fora da academia: artigos de opinião, colunas e guias.</p>
+
+      <article class="it" data-cat="opiniao">
+        <div class="when">7 abr. <b>2026</b></div>
+        <div>
+          <p class="kind">Artigo de divulgação</p>
+          <h3>Aldeando a política: a participação indígena no interior das instituições brasileiras</h3>
+          <p class="src">Revista FOCUS, edição 231, Fundação Perseu Abramo. Parceria entre o INCT Participa e o projeto Reconexão Periferias.</p>
+          <p class="desc">Sustenta que a presença indígena crescente na política institucional resulta de mobilização coletiva, e não de concessão do Estado.</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong> e Carla Guareschi.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://fpabramo.org.br/aldeando-a-politica-a-participacao-indigena-no-interior-das-instituicoes-brasileiras/" target="_blank" rel="noopener"><span class="fmt">Site</span>Ler na Fundação Perseu Abramo</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="opiniao">
+        <div class="when">5 out. <b>2023</b></div>
+        <div>
+          <p class="kind">Artigo de opinião</p>
+          <h3>Precisamos tomar a dianteira no debate sobre a reforma político-eleitoral</h3>
+          <p class="src">JOTA, seção Opinião e Análise.</p>
+          <p class="desc">Questiona a técnica por trás das reformas eleitorais que voltam ao Congresso a cada dois anos, sem tempo para avaliar os efeitos das mudanças anteriores.</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://www.jota.info/opiniao-e-analise/artigos/precisamos-tomar-a-dianteira-no-debate-sobre-a-reforma-politico-eleitoral-05102023" target="_blank" rel="noopener"><span class="fmt">Site</span>Ler no JOTA</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="opiniao">
+        <div class="when">30 set. <b>2022</b></div>
+        <div>
+          <p class="kind">Guia</p>
+          <h3>Partidos políticos: o que são e para que servem?</h3>
+          <p class="src">Im.pulsa, curso Elas Votam: uma conversa política entre mulheres. Revisado em dezembro de 2023.</p>
+          <p class="desc">Explica o papel dos partidos na democracia representativa e como podem se abrir mais a mulheres, pessoas negras, indígenas e LGBTQIA+.</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://www.impulsa.voto/materials/partidos-politicos/" target="_blank" rel="noopener"><span class="fmt">Site</span>Ler no Im.pulsa</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="opiniao">
+        <div class="when">15 set. <b>2022</b></div>
+        <div>
+          <p class="kind">Artigo de opinião</p>
+          <h3>A resistência vem aí: candidaturas indígenas nas eleições de 2022</h3>
+          <p class="src">Congresso em Foco, coluna Observatório das Eleições.</p>
+          <p class="desc">Mapeia o número recorde de candidaturas indígenas em 2022 e discute o que os partidos precisam fazer para torná-las competitivas.</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong> e Leonardo Barros Soares.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://www.congressoemfoco.com.br/coluna/20236/a-resistencia-vem-ai-candidaturas-indigenas-nas-eleicoes-de-2022" target="_blank" rel="noopener"><span class="fmt">Site</span>Ler no Congresso em Foco</a>
+        </div>
+      </article>
+
+      <article class="it" data-cat="opiniao">
+        <div class="when">fev. <b>2021</b></div>
+        <div>
+          <p class="kind">Artigo de análise</p>
+          <h3>As ruas foram às urnas? O partido Pachakutik nas eleições de 2021 no Equador</h3>
+          <p class="src">Boletim Lua Nova, CEDEC.</p>
+          <p class="desc">Analisa a volta do Pachakutik, braço eleitoral da Conaie, ao centro da disputa equatoriana depois dos protestos de 2019.</p>
+          <p class="cred"><span>Autoria:</span> <strong>Ana Carolina Vaz</strong>.</p>
+        </div>
+        <div class="docs">
+          <a class="doc" href="https://boletimluanova.org/as-ruas-foram-as-urnas-o-partido-pachakutik-nas-eleicoes-de-2021-no-equador/" target="_blank" rel="noopener"><span class="fmt">Site</span>Ler no Boletim Lua Nova</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="vazio" id="vazio" hidden>Nenhuma produção encontrada.<button type="button" id="limpar">Limpar busca</button></div>
+  </div>
+</main>
+
+<footer class="band">
+  <div class="wrap">Atualizado em 23 de novembro de 2026. Os documentos do OPar ficam no site do INCT Participa.</div>
+</footer>
+
+<script>
+{
+  const items = [...document.querySelectorAll('.it')];
+  const secs = [...document.querySelectorAll('.sec')];
+  const chips = [...document.querySelectorAll('.chip')];
+  const q = document.getElementById('busca');
+  const conta = document.getElementById('conta');
+  const vazio = document.getElementById('vazio');
+  const limpar = document.getElementById('limpar');
+  const lista = document.getElementById('lista');
+  const cats = chips.map(c => c.dataset.cat).filter(Boolean);
+  const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').toLowerCase();
+  const plural = n => n === 1 ? '1 produção' : n + ' produções';
+  let cat = '';
+
+  items.forEach(it => { it.dataset.t = norm(it.textContent); });
+  chips.forEach(c => {
+    const n = c.dataset.cat ? items.filter(it => it.dataset.cat === c.dataset.cat).length : items.length;
+    const b = c.querySelector('b');
+    if (b) b.textContent = n;
+  });
+
+  const apply = () => {
+    const t = norm(q.value.trim());
+    let n = 0;
+    items.forEach(it => {
+      const ok = (!cat || it.dataset.cat === cat) && (!t || it.dataset.t.includes(t));
+      it.hidden = !ok;
+      if (ok) n++;
+    });
+    secs.forEach(s => { s.hidden = !s.querySelector('.it:not([hidden])'); });
+    chips.forEach(c => c.setAttribute('aria-pressed', String((c.dataset.cat || '') === cat)));
+    conta.textContent = n === items.length ? plural(n) : 'Mostrando ' + n + ' de ' + plural(items.length);
+    vazio.hidden = n > 0;
+  };
+
+  const fromHash = () => {
+    const h = decodeURIComponent(location.hash.slice(1));
+    cat = cats.includes(h) ? h : '';
+    apply();
+  };
+
+  const clearHash = () => {
+    try { history.replaceState(null, '', location.pathname + location.search); }
+    catch (e) { /* sem histórico disponível */ }
+  };
+
+  const narrow = window.matchMedia('(max-width: 760px)');
+
+  chips.forEach(c => c.addEventListener('click', () => {
+    cat = c.dataset.cat || '';
+    if (cat) { if (location.hash.slice(1) !== cat) location.hash = cat; }
+    else if (location.hash) clearHash();
+    apply();
+    if (narrow.matches) lista.scrollIntoView();
+  }));
+
+  q.addEventListener('input', apply);
+  q.addEventListener('keydown', e => { if (e.key === 'Escape') { q.value = ''; apply(); } });
+  limpar.addEventListener('click', () => {
+    q.value = '';
+    cat = '';
+    if (location.hash) clearHash();
+    apply();
+    q.focus();
+  });
+
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+}
+</script>
+</body>
+</html>
